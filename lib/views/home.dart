@@ -32,23 +32,34 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.restaurant),
-            SizedBox(width: 8),
-            Text("My Recipe App"),
-          ],
+        appBar: AppBar(
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.restaurant),
+              SizedBox(width: 8),
+              Text("My Recipe App"),
+            ],
+          ),
+          backgroundColor: const Color.fromARGB(255, 222, 222, 222),
         ),
-        backgroundColor: const Color.fromARGB(255, 222, 222, 222),
-      ),
-      body: const RecipeCard(
-          title: "Honey Sesame Chicken",
-          cookTime: "20 min",
-          rating: "4.0",
-          thumbnailUrl:
-              "https://christieathome.com/wp-content/uploads/2021/02/Honey-Sesame-Chicken-Updated-5.jpg"),
-    );
+        body: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : ListView.builder(
+                itemCount: _recipes.length,
+                itemBuilder: (context, index) {
+                  return RecipeCard(
+                      title: _recipes[index].name,
+                      cookTime: _recipes[index].totalTime,
+                      rating: _recipes[index].rating.toString(),
+                      thumbnailUrl: _recipes[index].images);
+                })
+        // RecipeCard(
+        //     title: "Honey Sesame Chicken",
+        //     cookTime: "20 min",
+        //     rating: "4.0",
+        //     thumbnailUrl:
+        //         "https://christieathome.com/wp-content/uploads/2021/02/Honey-Sesame-Chicken-Updated-5.jpg"),
+        );
   }
 }
