@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RecipeDetailsPage extends StatelessWidget {
   final String name;
@@ -35,12 +36,12 @@ class RecipeDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(width: 6),
+            const SizedBox(width: 6),
             Text(
               name,
               style: const TextStyle(color: Colors.black, fontSize: 30),
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -84,18 +85,40 @@ class RecipeDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
+            const Row(
               children: [
-                const Icon(Icons.menu_book, color: Colors.black),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    "Directions: $directionsUrl",
-                    style: const TextStyle(color: Colors.black, fontSize: 20),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Icon(Icons.menu_book, color: Colors.black),
+                SizedBox(width: 6),
+                Text(
+                  "Directions:",
+                  style: TextStyle(color: Colors.black, fontSize: 20),
                 ),
               ],
+            ),
+            const SizedBox(height: 10),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  final recipeUri = Uri.parse(directionsUrl);
+                  await launchUrl(recipeUri);
+                  // if (await canLaunchUrl(recipeUri)) {
+                  //   await launchUrl(recipeUri);
+                  // } else {
+                  //   throw 'Could not launch $directionsUrl';
+                  // }
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  'View Directions',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
             ),
           ],
         ),
