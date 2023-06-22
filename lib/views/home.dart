@@ -50,31 +50,31 @@ class _HomePageState extends State<HomePage> {
             : ListView.builder(
                 itemCount: _recipes.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => RecipeDetailsPage(
-                                  name: _recipes[index].name,
-                                  thumbnailUrl: _recipes[index].images,
-                                  numberOfServings: _recipes[index].numberOfServings,
-                                  cookTime: _recipes[index].totalTime,
-                                  directionsUrl: _recipes[index].directionsUrl)));
-                    },
-                    child: RecipeCard(
-                        title: _recipes[index].name,
-                        cookTime: _recipes[index].totalTime,
-                        rating: _recipes[index].rating.toString(),
-                        thumbnailUrl: _recipes[index].images),
-                  );
+                  if (_recipes[index].name != '') {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => RecipeDetailsPage(
+                                    name: _recipes[index].name,
+                                    thumbnailUrl: _recipes[index].images,
+                                    numberOfServings:
+                                        _recipes[index].numberOfServings,
+                                    cookTime: _recipes[index].totalTime,
+                                    directionsUrl:
+                                        _recipes[index].directionsUrl)));
+                      },
+                      child: RecipeCard(
+                          title: _recipes[index].name,
+                          cookTime: _recipes[index].totalTime,
+                          rating: _recipes[index].rating.toString(),
+                          thumbnailUrl: _recipes[index].images),
+                    );
+                  } else {
+                    return null;
+                  }
                 })
-        // RecipeCard(
-        //     title: "Honey Sesame Chicken",
-        //     cookTime: "20 min",
-        //     rating: "4.0",
-        //     thumbnailUrl:
-        //         "https://christieathome.com/wp-content/uploads/2021/02/Honey-Sesame-Chicken-Updated-5.jpg"),
         );
   }
 }
