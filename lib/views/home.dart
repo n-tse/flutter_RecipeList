@@ -57,7 +57,9 @@ class _HomePageState extends State<HomePage> {
                           MaterialPageRoute(
                               builder: (context) => RecipeDetailsPage(
                                   name: _recipes[index].name,
-                                  numberOfServings: _recipes[index].numberOfServings,)));
+                                  thumbnailUrl: _recipes[index].images,
+                                  numberOfServings: _recipes[index].numberOfServings,
+                                  cookTime: _recipes[index].totalTime,)));
                     },
                     child: RecipeCard(
                         title: _recipes[index].name,
