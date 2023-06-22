@@ -3,12 +3,14 @@ class Recipe {
   final String images;
   final double rating;
   final String totalTime;
+  final int numberOfServings;
 
   Recipe(
       {required this.name,
       required this.images,
       required this.rating,
-      required this.totalTime});
+      required this.totalTime,
+      required this.numberOfServings,});
 
   factory Recipe.fromJson(dynamic json) {
     if (json == null) {
@@ -18,6 +20,7 @@ class Recipe {
         images: '',
         rating: 0.0,
         totalTime: '',
+        numberOfServings: 0,
       );
     } else {
       return Recipe(
@@ -29,6 +32,7 @@ class Recipe {
             : '',
         rating: json['rating'] != null ? json['rating'] as double : 0.0,
         totalTime: json['totalTime'] != null ? json['totalTime'] as String : '',
+        numberOfServings: json['numberOfServings'] != null ? json['numberOfServings'] as int : 0,
       );
     }
   }
@@ -53,6 +57,6 @@ class Recipe {
 
   @override
   String toString() {
-    return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime}';
+    return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime, numberOfServings: $numberOfServings}';
   }
 }
