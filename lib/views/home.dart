@@ -59,7 +59,8 @@ class _HomePageState extends State<HomePage> {
                                   name: _recipes[index].name,
                                   thumbnailUrl: _recipes[index].images,
                                   numberOfServings: _recipes[index].numberOfServings,
-                                  cookTime: _recipes[index].totalTime,)));
+                                  cookTime: _recipes[index].totalTime,
+                                  directionsUrl: _recipes[index].directionsUrl)));
                     },
                     child: RecipeCard(
                         title: _recipes[index].name,

@@ -5,12 +5,14 @@ class RecipeDetailsPage extends StatelessWidget {
   final String thumbnailUrl;
   final int numberOfServings;
   final String cookTime;
+  final String directionsUrl;
 
   const RecipeDetailsPage({
     required this.name,
     required this.thumbnailUrl,
     required this.numberOfServings,
     required this.cookTime,
+    required this.directionsUrl,
     Key? key,
   }) : super(key: key);
 
@@ -61,11 +63,11 @@ class RecipeDetailsPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
-                Icon(Icons.group, color: Colors.black),
-                SizedBox(width: 6),
+                const Icon(Icons.group, color: Colors.black),
+                const SizedBox(width: 6),
                 Text(
                   "Servings: $numberOfServings",
                   style: const TextStyle(color: Colors.black, fontSize: 20),
@@ -74,8 +76,8 @@ class RecipeDetailsPage extends StatelessWidget {
             ),
             Row(
               children: [
-                Icon(Icons.access_time, color: Colors.black),
-                SizedBox(width: 6),
+                const Icon(Icons.access_time, color: Colors.black),
+                const SizedBox(width: 6),
                 Text(
                   "Cook Time: $cookTime",
                   style: const TextStyle(color: Colors.black, fontSize: 20),
@@ -84,11 +86,14 @@ class RecipeDetailsPage extends StatelessWidget {
             ),
             Row(
               children: [
-                Icon(Icons.menu_book, color: Colors.black),
-                SizedBox(width: 6),
-                Text(
-                  "Directions:",
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                const Icon(Icons.menu_book, color: Colors.black),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    "Directions: $directionsUrl",
+                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),

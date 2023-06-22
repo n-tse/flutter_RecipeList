@@ -4,13 +4,16 @@ class Recipe {
   final double rating;
   final String totalTime;
   final int numberOfServings;
+  final String directionsUrl;
 
-  Recipe(
-      {required this.name,
-      required this.images,
-      required this.rating,
-      required this.totalTime,
-      required this.numberOfServings,});
+  Recipe({
+    required this.name,
+    required this.images,
+    required this.rating,
+    required this.totalTime,
+    required this.numberOfServings,
+    required this.directionsUrl,
+  });
 
   factory Recipe.fromJson(dynamic json) {
     if (json == null) {
@@ -21,6 +24,7 @@ class Recipe {
         rating: 0.0,
         totalTime: '',
         numberOfServings: 0,
+        directionsUrl: '',
       );
     } else {
       return Recipe(
@@ -32,7 +36,12 @@ class Recipe {
             : '',
         rating: json['rating'] != null ? json['rating'] as double : 0.0,
         totalTime: json['totalTime'] != null ? json['totalTime'] as String : '',
-        numberOfServings: json['numberOfServings'] != null ? json['numberOfServings'] as int : 0,
+        numberOfServings: json['numberOfServings'] != null
+            ? json['numberOfServings'] as int
+            : 0,
+        directionsUrl: json['directionsUrl'] != null
+            ? json['directionsUrl'] as String
+            : '',
       );
     }
   }
@@ -57,6 +66,6 @@ class Recipe {
 
   @override
   String toString() {
-    return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime, numberOfServings: $numberOfServings}';
+    return 'Recipe {name: $name, image: $images, rating: $rating, totalTime: $totalTime, numberOfServings: $numberOfServings, directionsUrl: $directionsUrl}';
   }
 }
