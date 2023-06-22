@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_list/models/recipe.api.dart';
 import 'package:recipe_list/models/recipe.dart';
 import 'package:recipe_list/views/widgets/recipe_card.dart';
+import 'package:recipe_list/views/widgets/recipe_details.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _isLoading = false;
     });
-    print(_recipes);
+    // print(_recipes);
   }
 
   @override
@@ -41,18 +42,28 @@ class _HomePageState extends State<HomePage> {
               Text("My Recipe App"),
             ],
           ),
-          backgroundColor: const Color.fromARGB(255, 222, 222, 222),
+          backgroundColor: Colors.amber,
+          // backgroundColor: const Color.fromARGB(255, 222, 222, 222),
         ),
         body: _isLoading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
                 itemCount: _recipes.length,
                 itemBuilder: (context, index) {
-                  return RecipeCard(
-                      title: _recipes[index].name,
-                      cookTime: _recipes[index].totalTime,
-                      rating: _recipes[index].rating.toString(),
-                      thumbnailUrl: _recipes[index].images);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RecipeDetailsPage(
+                                  name: _recipes[index].name)));
+                    },
+                    child: RecipeCard(
+                        title: _recipes[index].name,
+                        cookTime: _recipes[index].totalTime,
+                        rating: _recipes[index].rating.toString(),
+                        thumbnailUrl: _recipes[index].images),
+                  );
                 })
         // RecipeCard(
         //     title: "Honey Sesame Chicken",
